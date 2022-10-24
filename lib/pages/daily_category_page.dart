@@ -41,7 +41,7 @@ class DailyCategoryPage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/photo-rating');
+                    Navigator.pushNamed(context, '/take-picture');
                   },
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size.fromRadius(60),
