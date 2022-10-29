@@ -18,21 +18,21 @@ class _SelectFavouritePageState extends State<SelectFavouritePage> {
   @override
   Widget build(BuildContext context) {
     models = [
-      Photo('Mi', 'coffee', 'Wrocław', 1380, 'Coffee with milk.',
+      Photo('Mi', 'coffee', 'Wrocław', 1380, 23, 'Coffee with milk.',
           'assets/images/coffee3.jpg'),
-      Photo('Charles King', 'coffee', 'Wrocław', 1295, 'My coffee.',
+      Photo('Charles King', 'coffee', 'Wrocław', 1295, 234, 'My coffee.',
           'assets/images/coffee1.jpg'),
-      Photo('Susann', 'coffee', 'Wrocław', 1654, 'Big noon coffee.',
+      Photo('Susann', 'coffee', 'Wrocław', 1654, 3245, 'Big noon coffee.',
           'assets/images/coffee2.png'),
-      Photo('Charles King', 'coffee', 'Wrocław', 1295, 'My coffee.',
+      Photo('Charles King', 'coffee', 'Wrocław', 1295, 2345, 'My coffee.',
           'assets/images/coffee4.jpg'),
-      Photo('Adam', 'coffee', 'Wrocław', 2138, 'Small morning coffee.',
+      Photo('Adam', 'coffee', 'Wrocław', 2138, 3344, 'Small morning coffee.',
           'assets/images/coffee1.jpg'),
-      Photo('Susann', 'coffee', 'Wrocław', 1654, 'Big noon coffee.',
+      Photo('Susann', 'coffee', 'Wrocław', 1654, 34, 'Big noon coffee.',
           'assets/images/coffee2.png'),
-      Photo('Mi', 'coffee', 'Wrocław', 1380, 'Coffee with milk.',
+      Photo('Mi', 'coffee', 'Wrocław', 1380, 3455, 'Coffee with milk.',
           'assets/images/coffee3.jpg'),
-      Photo('Charles King', 'coffee', 'Wrocław', 1295, 'My coffee.',
+      Photo('Charles King', 'coffee', 'Wrocław', 1295, 355, 'My coffee.',
           'assets/images/coffee4.jpg'),
     ];
 

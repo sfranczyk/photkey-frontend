@@ -2,9 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:photkey/providers/card_provider.dart';
 import 'package:photkey/utils/photo_card.dart';
 import 'package:provider/provider.dart';
+import 'package:shake/shake.dart';
 
-class PhotoRatingPage extends StatelessWidget {
+import 'button_under_rating_image.dart';
+
+class PhotoRatingPage extends StatefulWidget {
   const PhotoRatingPage({Key? key}) : super(key: key);
+
+  @override
+  State<PhotoRatingPage> createState() => _PhotoRatingPageState();
+}
+
+class _PhotoRatingPageState extends State<PhotoRatingPage> {
+  late ShakeDetector detector;
+
+  @override
+  void initState() {
+    super.initState();
+    detector = ShakeDetector.autoStart(
+      onPhoneShake: () {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Shake!')));
+        // Do stuff on phone shake
+      },
+      minimumShakeCount: 1,
+      shakeSlopTimeMS: 500,
+      shakeCountResetTime: 3000,
+      shakeThresholdGravity: 2.7,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    detector.stopListening();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,41 +113,5 @@ class PhotoRatingPage extends StatelessWidget {
             ),
           ),
         ]));
-  }
-}
-
-class ButtonUnderRatingImage extends StatelessWidget {
-  final String hint;
-  final IconData icon;
-  final void Function() onPressed;
-
-  const ButtonUnderRatingImage(
-      {super.key,
-      required this.hint,
-      required this.icon,
-      required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-            fixedSize: const Size.fromRadius(25),
-            shape: const CircleBorder(),
-            backgroundColor: Colors.white),
-        child: Icon(
-          icon,
-          color: Colors.deepPurple,
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 5),
-        child: Text(
-          hint,
-          style: const TextStyle(color: Colors.deepPurple),
-        ),
-      ),
-    ]);
   }
 }

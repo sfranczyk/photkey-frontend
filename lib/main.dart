@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photkey/pages/daily_category_page.dart';
 import 'package:photkey/pages/daily_top_page.dart';
 import 'package:photkey/pages/login_page.dart';
-import 'package:photkey/pages/photo_rating_page.dart';
+import 'package:photkey/pages/photo_rating/photo_rating_page.dart';
 import 'package:photkey/pages/select_favourite_page.dart';
 import 'package:provider/provider.dart';
 

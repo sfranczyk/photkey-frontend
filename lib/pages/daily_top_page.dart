@@ -17,13 +17,13 @@ class _DailyTopPageState extends State<DailyTopPage> {
   @override
   Widget build(BuildContext context) {
     models = [
-      Photo('Adam', 'coffee', 'Wrocław', 2138, 'Small morning coffee.',
+      Photo('Adam', 'coffee', 'Wrocław', 2138, 123, 'Small morning coffee.',
           'assets/images/coffee1.jpg'),
-      Photo('Susann', 'coffee', 'Wrocław', 1654, 'Big noon coffee.',
+      Photo('Susann', 'coffee', 'Wrocław', 1654, 12, 'Big noon coffee.',
           'assets/images/coffee2.png'),
-      Photo('Mi', 'coffee', 'Wrocław', 1380, 'Coffee with milk.',
+      Photo('Mi', 'coffee', 'Wrocław', 1380, 32, 'Coffee with milk.',
           'assets/images/coffee3.jpg'),
-      Photo('Charles King', 'coffee', 'Wrocław', 1295, 'My coffee.',
+      Photo('Charles King', 'coffee', 'Wrocław', 1295, 23, 'My coffee.',
           'assets/images/coffee4.jpg'),
     ];
 
