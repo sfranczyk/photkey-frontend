@@ -1,15 +1,22 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:photkey/pages/daily_category_page.dart';
 import 'package:photkey/pages/daily_top_page.dart';
 import 'package:photkey/pages/login_page.dart';
 import 'package:photkey/pages/photo_rating/photo_rating_page.dart';
 import 'package:photkey/pages/select_favourite_page.dart';
+import 'package:photkey/pages/take_picture_page.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/card_provider.dart';
 
-void main() {
+Future<void> main() async {
   const String title = 'PhotKey';
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final cameras = await availableCameras();
+
   final ThemeData themeData = ThemeData(
     primarySwatch: Colors.deepPurple,
     fontFamily: 'Roboto',
@@ -26,6 +33,7 @@ void main() {
     '/photo-rating': (context) => const PhotoRatingPage(),
     '/daily-top': (context) => const DailyTopPage(),
     '/select-favourite': (context) => const SelectFavouritePage(),
+    '/take-picture': (context) => TakePicturePage(cameras: cameras),
   };
 
   runApp(ChangeNotifierProvider(
@@ -34,6 +42,6 @@ void main() {
         title: title,
         theme: themeData,
         routes: routes,
-        initialRoute: '/select-favourite',
+        initialRoute: '/',
       )));
 }
