@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photkey/models/photo.dart';
 import 'package:photkey/providers/card_provider.dart';
 import 'package:photkey/utils/photo_card.dart';
 import 'package:provider/provider.dart';
@@ -14,19 +15,29 @@ class PhotoRatingPage extends StatefulWidget {
 }
 
 class _PhotoRatingPageState extends State<PhotoRatingPage> {
+  late List<Photo> images;
   late ShakeDetector detector;
+  var _isShake = 0;
 
   @override
   void initState() {
     super.initState();
     detector = ShakeDetector.autoStart(
       onPhoneShake: () {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Shake!')));
-        // Do stuff on phone shake
+        _isShake++;
+        setState(() {});
+        var img = images.last;
+        Future.delayed(const Duration(seconds: 2), () {
+          setState(() {
+            _isShake--;
+            if (_isShake == 0) {
+              img.isStarred = true;
+            }
+          });
+        });
       },
       minimumShakeCount: 1,
-      shakeSlopTimeMS: 500,
+      shakeSlopTimeMS: 100,
       shakeCountResetTime: 3000,
       shakeThresholdGravity: 2.7,
     );
@@ -40,7 +51,7 @@ class _PhotoRatingPageState extends State<PhotoRatingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final images = Provider.of<CardProvider>(context).urlImages;
+    images = Provider.of<CardProvider>(context).images;
     var isMoreThan2 = images.length > 1;
     return Scaffold(
         appBar: AppBar(
@@ -87,10 +98,12 @@ class _PhotoRatingPageState extends State<PhotoRatingPage> {
             child: Stack(
               children: images
                   .map((e) => PhotoCard(
-                        urlPhoto: e,
+                        urlPhoto: e.urlImage,
                         isFront: images.last == e,
                         isSecond:
                             isMoreThan2 ? images[images.length - 2] == e : true,
+                        isShake: _isShake > 0,
+                        isStared: images.last == e && e.isStarred,
                       ))
                   .toList(),
             ),
@@ -103,6 +116,17 @@ class _PhotoRatingPageState extends State<PhotoRatingPage> {
               children: [
                 ButtonUnderRatingImage(
                     hint: 'Previous', icon: Icons.arrow_back, onPressed: () {}),
+                images.last.isStarred
+                    ? ButtonUnderRatingImage(
+                        hint: 'Unstar',
+                        icon: Icons.star_half_sharp,
+                        color: Colors.red,
+                        onPressed: () {
+                          setState(() {
+                            images.last.isStarred = false;
+                          });
+                        })
+                    : const Spacer(),
                 ButtonUnderRatingImage(
                     hint: 'Liked',
                     icon: Icons.grid_on,
