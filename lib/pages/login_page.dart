@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:photkey/alerts/login_failed_alert.dart';
+import 'package:photkey/alerts/login_success_alert.dart';
+import 'package:photkey/api/api_service.dart';
+import 'package:photkey/models/user_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class LoginPage extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
+                    labelText: 'Username',
                     hintText: 'Enter valid email'),
               ),
             ),
@@ -72,4 +77,6 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+  setState(Null Function() param0) {}
 }

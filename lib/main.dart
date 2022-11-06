@@ -1,11 +1,14 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:photkey/pages/daily_category_page.dart';
 import 'package:photkey/pages/daily_top_page.dart';
 import 'package:photkey/pages/login_page.dart';
 import 'package:photkey/pages/photo_rating/photo_rating_page.dart';
+import 'package:photkey/pages/user/user_friends_page.dart';
+import 'package:photkey/pages/user/user_profile_page.dart';
 import 'package:photkey/pages/select_favourite_page.dart';
 import 'package:photkey/pages/take_picture_page.dart';
+import 'package:photkey/pages/user/user_qr_scan_page.dart';
+import 'package:photkey/pages/user/user_qr_show_page.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/card_provider.dart';
@@ -18,7 +21,7 @@ Future<void> main() async {
   final cameras = await availableCameras();
 
   final ThemeData themeData = ThemeData(
-    primarySwatch: Colors.deepPurple,
+    primarySwatch: Colors.deepOrange,
     fontFamily: 'Roboto',
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -28,20 +31,29 @@ Future<void> main() async {
   );
 
   final routes = {
-    '/': (context) => const LoginPage(),
+    '/': (context) => LoginPage(),
     '/daily-category': (context) => const DailyCategoryPage(category: 'coffee'),
     '/photo-rating': (context) => const PhotoRatingPage(),
     '/daily-top': (context) => const DailyTopPage(),
     '/select-favourite': (context) => const SelectFavouritePage(),
     '/take-picture': (context) => TakePicturePage(cameras: cameras),
+    '/user-profile': (context) => UserProfilePage(isOwner: true),
+    '/user-qr-show': (context) => const UserQrShowPage(),
+    '/user-qr-scan': (context) => const UserQrScanPage(),
+    '/user-friends': (context) => UserFriendsPage(),
   };
 
-  runApp(ChangeNotifierProvider(
-      create: (context) => CardProvider(),
-      child: MaterialApp(
-        title: title,
-        theme: themeData,
-        routes: routes,
-        initialRoute: '/',
-      )));
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => CardProvider(),
+      ),
+    ],
+    child: MaterialApp(
+      title: title,
+      theme: themeData,
+      routes: routes,
+      initialRoute: '/user-profile',
+    ),
+  ));
 }

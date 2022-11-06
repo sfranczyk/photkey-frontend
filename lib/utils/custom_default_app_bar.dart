@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photkey/utils/user/user_avatar_app_bar.dart';
 
 class CustomDefaultAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -14,9 +15,7 @@ class CustomDefaultAppBar extends StatelessWidget
     return AppBar(
       title: const Align(
         alignment: Alignment.centerRight,
-        child: CircleAvatar(
-          backgroundImage: AssetImage('assets/images/coffee1.jpg'),
-        ),
+        child: UserAvatarAppBar()
       ),
     );
   }

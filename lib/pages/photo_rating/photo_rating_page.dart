@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photkey/models/photo.dart';
 import 'package:photkey/providers/card_provider.dart';
 import 'package:photkey/utils/photo_card.dart';
+import 'package:photkey/utils/user/user_avatar_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shake/shake.dart';
 
@@ -65,9 +66,7 @@ class _PhotoRatingPageState extends State<PhotoRatingPage> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 20),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/coffee1.jpg'),
-                  ),
+                  child: UserAvatarAppBar()
                 )
               ]),
         ),
