@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:photkey/pages/daily_category_page.dart';
 import 'package:photkey/pages/daily_top_page.dart';
@@ -53,7 +54,7 @@ Future<void> main() async {
       title: title,
       theme: themeData,
       routes: routes,
-      initialRoute: '/user-profile',
+      initialRoute: '/',
     ),
   ));
 }

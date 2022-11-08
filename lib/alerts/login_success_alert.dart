@@ -8,7 +8,7 @@ class LoginSuccessAlert {
   LoginSuccessAlert(this.context, this.username) {
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.error,
+      dialogType: DialogType.success,
       animType: AnimType.scale,
       title: 'Hello $username!',
       desc: 'Authentication success!',

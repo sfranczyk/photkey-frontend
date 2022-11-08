@@ -8,7 +8,6 @@ class Photo {
   String info;
   String urlImage;
 
-
-  Photo(this.author, this.category, this.location, this.likes, this.shakes, this.info,
-      this.urlImage);
+  Photo(this.author, this.category, this.location, this.likes, this.shakes,
+      this.info, this.urlImage);
 }

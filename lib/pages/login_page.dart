@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:photkey/alerts/login_failed_alert.dart';
+import 'package:photkey/alerts/friend_added_alert.dart';
 import 'package:photkey/alerts/login_success_alert.dart';
-import 'package:photkey/api/api_service.dart';
-import 'package:photkey/models/user_model.dart';
-import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +65,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
+                    // handle login
                     Navigator.pushNamed(context, '/daily-category');
                   },
                   child: const Text(
@@ -78,5 +81,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  setState(Null Function() param0) {}
 }

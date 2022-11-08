@@ -2,6 +2,8 @@ import 'dart:io' show Platform;
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:photkey/alerts/login_failed_alert.dart';
+import 'package:photkey/alerts/login_success_alert.dart';
 
 import '../../alerts/friend_added_alert.dart';
 import '../../utils/user/user_qr_scan_app_bar.dart';

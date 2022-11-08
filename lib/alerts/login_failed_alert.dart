@@ -14,7 +14,6 @@ class LoginFailedAlert {
       autoHide: const Duration(seconds: 3),
       onDismissCallback: (type) {
         debugPrint('Dialog Dissmiss from callback $type');
-        Navigator.pop(context);
       },
     ).show();
   }
