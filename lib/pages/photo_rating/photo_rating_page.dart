@@ -130,7 +130,7 @@ class _PhotoRatingPageState extends State<PhotoRatingPage> {
                     hint: 'Liked',
                     icon: Icons.grid_on,
                     onPressed: () {
-                      Navigator.pushNamed(context, '/daily-top');
+                      Navigator.pushNamed(context, '/select-favourite');
                     }),
               ],
             ),
