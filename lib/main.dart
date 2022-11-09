@@ -10,6 +10,7 @@ import 'package:photkey/pages/select_favourite_page.dart';
 import 'package:photkey/pages/take_picture_page.dart';
 import 'package:photkey/pages/user/user_qr_scan_page.dart';
 import 'package:photkey/pages/user/user_qr_show_page.dart';
+import 'package:photkey/providers/location_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/card_provider.dart';
@@ -46,9 +47,8 @@ Future<void> main() async {
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (context) => CardProvider(),
-      ),
+      ChangeNotifierProvider(create: (context) => CardProvider()),
+      ChangeNotifierProvider(create: (context) => LocationProvider()),
     ],
     child: MaterialApp(
       title: title,

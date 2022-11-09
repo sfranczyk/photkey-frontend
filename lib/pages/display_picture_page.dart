@@ -1,16 +1,26 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:photkey/providers/location_provider.dart';
+import 'package:provider/provider.dart';
 
-class DisplayPicturePage extends StatelessWidget {
+import '../alerts/location_alert.dart';
+
+class DisplayPicturePage extends StatefulWidget {
   final String imagePath;
 
   const DisplayPicturePage({super.key, required this.imagePath});
 
   @override
-  Widget build(BuildContext context) {
-    var imgFile = File(imagePath);
+  State<DisplayPicturePage> createState() => _DisplayPicturePageState();
+}
 
+class _DisplayPicturePageState extends State<DisplayPicturePage> {
+  @override
+  Widget build(BuildContext context) {
+    var imgFile = File(widget.imagePath);
     return Scaffold(
       appBar: AppBar(
         title: Row(
