@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/photo.dart';
 import '../../models/user_model.dart';
-import '../../providers/header_text.dart';
+import '../../utils/header_text.dart';
 
 class UserProfilePhotosWidget extends StatelessWidget {
   UserProfilePhotosWidget({Key? key, required this.user}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photkey/providers/header_text.dart';
+import 'package:photkey/utils/header_text.dart';
 
 import '../models/photo.dart';
 import '../utils/custom_default_app_bar.dart';

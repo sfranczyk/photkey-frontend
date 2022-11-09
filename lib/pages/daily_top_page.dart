@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photkey/utils/custom_default_app_bar.dart';
 
 import '../models/photo.dart';
-import '../providers/header_text.dart';
+import '../utils/header_text.dart';
 
 class DailyTopPage extends StatefulWidget {
   const DailyTopPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../providers/header_text.dart';
+import '../../utils/header_text.dart';
 
 class UserProfileAboutWidget extends StatelessWidget {
   const UserProfileAboutWidget({Key? key, required this.description})

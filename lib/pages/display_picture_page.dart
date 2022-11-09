@@ -41,7 +41,9 @@ class DisplayPicturePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         elevation: 8,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.popAndPushNamed(context, '/photo-rating');
+        },
         icon: const Icon(Icons.send),
         label: const Text('Send',
             style: TextStyle(fontSize: 20)),
