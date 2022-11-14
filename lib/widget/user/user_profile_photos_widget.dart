@@ -1,64 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:photkey/utils/custom_default_app_bar.dart';
 
-import '../models/photo.dart';
-import '../utils/header_text.dart';
+import '../../models/photo.dart';
+import '../../models/user_model.dart';
+import '../../utils/header_text.dart';
 
-class DailyTopPage extends StatefulWidget {
-  const DailyTopPage({Key? key}) : super(key: key);
-
-  @override
-  State<DailyTopPage> createState() => _DailyTopPageState();
-}
-
-class _DailyTopPageState extends State<DailyTopPage> {
-  List<Photo> models = [];
+class UserProfilePhotosWidget extends StatelessWidget {
+  UserProfilePhotosWidget({Key? key, required this.user}) : super(key: key);
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
-    models = [
-      Photo('Adam', 'coffee', 'Wrocław', 2138, 123, 'Small morning coffee.',
-          'assets/images/coffee1.jpg'),
-      Photo('Susann', 'coffee', 'Wrocław', 1654, 12, 'Big noon coffee.',
-          'assets/images/coffee2.png'),
-      Photo('Mi', 'coffee', 'Wrocław', 1380, 32, 'Coffee with milk.',
-          'assets/images/coffee3.jpg'),
-      Photo('Charles King', 'coffee', 'Wrocław', 1295, 23, 'My coffee.',
-          'assets/images/coffee4.jpg'),
-    ];
-
-    return Scaffold(
-      appBar: const CustomDefaultAppBar(),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-            child: Row(
-              children: const [
-                HeaderText('Daily ', Colors.grey),
-                HeaderText('Top', Colors.purple),
-              ],
-            ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
+          child: Row(
+            children: [
+              const HeaderText('User ', Colors.grey),
+              HeaderText('Top', Theme.of(context).primaryColorLight),
+            ],
           ),
-          Flexible(
-            child: GridView.count(
-              crossAxisCount: 1,
-              childAspectRatio: 1.5,
-              mainAxisSpacing: 8,
-              children: models.asMap().entries.map((entry) {
-                int idx = entry.key;
-                Photo photo = entry.value;
+        ),
+        GridView.count(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          crossAxisCount: 1,
+          childAspectRatio: 1.5,
+          mainAxisSpacing: 8,
+          children: user.photos.asMap().entries.map((entry) {
+            int idx = entry.key;
+            Photo photo = entry.value;
 
-                return photoItem(photo, idx);
-              }).toList(),
-            ),
-          )
-        ],
-      ),
+            return buildPhotoItem(photo, idx);
+          }).toList(),
+          ),
+      ],
     );
   }
 
-  Widget photoItem(Photo photo, int index) {
+  Widget buildPhotoItem(Photo photo, int index) {
     var isPictureRight = index % 2 == 0;
 
     double leftMargin = isPictureRight ? 8 : 16;
@@ -68,7 +48,7 @@ class _DailyTopPageState extends State<DailyTopPage> {
       Expanded(
         child: Padding(
           padding:
-              const EdgeInsets.only(top: 8.0, left: 16, right: 16, bottom: 14),
+          const EdgeInsets.only(top: 8.0, left: 16, right: 16, bottom: 14),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -135,4 +115,5 @@ class _DailyTopPageState extends State<DailyTopPage> {
       children: isPictureRight ? elements : elements.reversed.toList(),
     );
   }
+
 }

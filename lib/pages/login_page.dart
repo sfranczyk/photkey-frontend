@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:photkey/alerts/friend_added_alert.dart';
+import 'package:photkey/alerts/login_success_alert.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +33,7 @@ class LoginPage extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
+                    labelText: 'Username',
                     hintText: 'Enter valid email'),
               ),
             ),
@@ -58,6 +65,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
+                    // handle login
                     Navigator.pushNamed(context, '/daily-category');
                   },
                   child: const Text(
@@ -72,4 +80,5 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
 }

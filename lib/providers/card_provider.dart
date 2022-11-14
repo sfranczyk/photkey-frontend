@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:photkey/models/photo.dart';
 
 enum CardStatus { like, dislike }
 
 class CardProvider extends ChangeNotifier {
-  List<String> _urlImages = [];
+  List<Photo> _images = [];
   bool _isDragging = false;
   Offset _position = Offset.zero;
   Size _screenSize = Size.zero;
 
-  List<String> get urlImages => _urlImages;
+  List<Photo> get images => _images;
   Offset get position => _position;
   bool get isDragging => _isDragging;
 
@@ -61,11 +62,23 @@ class CardProvider extends ChangeNotifier {
   }
 
   void resetPhotos() {
-    _urlImages = <String>[
-      "assets/images/coffee1.jpg",
-      "assets/images/coffee2.png",
-      "assets/images/coffee3.jpg",
-      "assets/images/coffee4.jpg"
+    _images = <Photo>[
+    Photo('Mi', 'coffee', 'Wrocław', 1380, 23, 'Coffee with milk.',
+    'assets/images/coffee3.jpg'),
+    Photo('Charles King', 'coffee', 'Wrocław', 1295, 234, 'My coffee.',
+    'assets/images/coffee1.jpg'),
+    Photo('Susann', 'coffee', 'Wrocław', 1654, 3245, 'Big noon coffee.',
+    'assets/images/coffee2.png'),
+    Photo('Charles King', 'coffee', 'Wrocław', 1295, 2345, 'My coffee.',
+    'assets/images/coffee4.jpg'),
+    Photo('Adam', 'coffee', 'Wrocław', 2138, 3344, 'Small morning coffee.',
+    'assets/images/coffee1.jpg'),
+    Photo('Susann', 'coffee', 'Wrocław', 1654, 34, 'Big noon coffee.',
+    'assets/images/coffee2.png'),
+    Photo('Mi', 'coffee', 'Wrocław', 1380, 3455, 'Coffee with milk.',
+    'assets/images/coffee3.jpg'),
+    Photo('Charles King', 'coffee', 'Wrocław', 1295, 355, 'My coffee.',
+    'assets/images/coffee4.jpg'),
     ].reversed.toList();
   }
 
@@ -90,12 +103,12 @@ class CardProvider extends ChangeNotifier {
   }
 
   Future _nextCard() async {
-    if (_urlImages.isEmpty) return;
+    if (_images.isEmpty) return;
 
     await Future.delayed(const Duration(milliseconds: 200));
-    _urlImages.removeLast();
+    _images.removeLast();
 
-    if (_urlImages.isEmpty) {
+    if (_images.isEmpty) {
       resetPhotos();
     }
 

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/animate.dart';
+import 'package:flutter_animate/effects/effects.dart';
+import 'package:flutter_animate/extensions/num_duration_extensions.dart';
 import 'package:photkey/providers/card_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -6,19 +9,25 @@ class PhotoCard extends StatefulWidget {
   final String urlPhoto;
   final bool isFront;
   final bool isSecond;
+  final bool isShake;
+  final bool isStared;
 
   const PhotoCard(
       {Key? key,
       required this.urlPhoto,
       required this.isFront,
-      required this.isSecond})
+      required this.isSecond,
+      required this.isShake,
+      required this.isStared})
       : super(key: key);
 
   @override
   State<PhotoCard> createState() => _PhotoCardState();
 }
 
-class _PhotoCardState extends State<PhotoCard> {
+class _PhotoCardState extends State<PhotoCard>
+    with SingleTickerProviderStateMixin {
+
   @override
   void initState() {
     super.initState();
@@ -46,11 +55,11 @@ class _PhotoCardState extends State<PhotoCard> {
           final milliseconds = provider.isDragging ? 0 : 300;
 
           return AnimatedContainer(
-            curve: Curves.easeInOut,
-            duration: Duration(milliseconds: milliseconds),
-            transform: Matrix4.identity()..translate(position.dx, position.dy),
-            child: buildCard(),
-          );
+              curve: Curves.easeInOut,
+              duration: Duration(milliseconds: milliseconds),
+              transform: Matrix4.identity()
+                ..translate(position.dx, position.dy),
+              child: chooseBuild());
         },
       ),
       onPanStart: (details) {
@@ -68,6 +77,32 @@ class _PhotoCardState extends State<PhotoCard> {
 
         provider.endPosition();
       },
+    );
+  }
+
+  Widget chooseBuild() {
+    if (widget.isStared) {
+      return buildAnimateShimmerCard();
+    }
+    if (widget.isShake) {
+      return buildAnimateShakeCard();
+    }
+    return buildCard();
+  }
+
+  Widget buildAnimateShimmerCard() {
+    return Animate(
+      effects: [ShimmerEffect(delay: 800.ms, duration: 1600.ms)],
+      onPlay: (controller) => controller.repeat(reverse: true),
+      child: buildCard(),
+    );
+  }
+
+  Widget buildAnimateShakeCard() {
+    return Animate(
+      effects: [ShakeEffect(delay: 800.ms, duration: 1600.ms)],
+      onPlay: (controller) => controller.repeat(reverse: true),
+      child: buildCard(),
     );
   }
 
@@ -112,6 +147,14 @@ class _PhotoCardState extends State<PhotoCard> {
               )
             ],
           ),
+        ),
+        Center(
+          child: widget.isStared ? const Icon(
+            Icons.star_border_sharp,
+            color: Colors.yellow,
+            size: 200.0,
+            shadows: <Shadow>[Shadow(color: Colors.deepPurple, blurRadius: 15.0)],
+          ) : null,
         ),
       ]),
     );

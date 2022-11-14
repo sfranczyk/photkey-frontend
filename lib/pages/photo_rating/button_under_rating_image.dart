@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 class ButtonUnderRatingImage extends StatelessWidget {
   final String hint;
   final IconData icon;
+  final Color color;
   final void Function() onPressed;
 
   const ButtonUnderRatingImage(
       {super.key,
         required this.hint,
         required this.icon,
-        required this.onPressed});
+        required this.onPressed,
+        this.color = Colors.deepPurple
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +25,14 @@ class ButtonUnderRatingImage extends StatelessWidget {
             backgroundColor: Colors.white),
         child: Icon(
           icon,
-          color: Colors.deepPurple,
+          color: color,
         ),
       ),
       Padding(
         padding: const EdgeInsets.only(top: 5),
         child: Text(
           hint,
-          style: const TextStyle(color: Colors.deepPurple),
+          style: TextStyle(color: color),
         ),
       ),
     ]);
