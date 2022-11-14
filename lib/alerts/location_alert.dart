@@ -8,14 +8,15 @@ class LocationAlert{
   LocationAlert(this.context, this.location){
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.info,
+      dialogType: DialogType.success,
       animType: AnimType.scale,
-      title: 'Congrats!',
-      desc: 'You are now friends!\n$location',
-      autoHide: const Duration(seconds: 4),
+      title: 'Photo added!',
+      desc: 'Position: \n$location',
+      autoHide: const Duration(seconds: 2),
       onDismissCallback: (type) {
         debugPrint('Dialog Dissmiss from callback $type');
-        // Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pushNamed(context, '/photo-rating');
       },
     ).show();
   }
