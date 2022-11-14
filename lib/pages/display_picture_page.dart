@@ -1,25 +1,37 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:photkey/alerts/location_alert.dart';
 import 'package:photkey/providers/location_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../alerts/location_alert.dart';
 
 class DisplayPicturePage extends StatefulWidget {
   final String imagePath;
 
-  const DisplayPicturePage({super.key, required this.imagePath});
+  DisplayPicturePage({super.key, required this.imagePath});
 
   @override
   State<DisplayPicturePage> createState() => _DisplayPicturePageState();
 }
 
 class _DisplayPicturePageState extends State<DisplayPicturePage> {
+  Future<Position>? _position;
+
+  @override
+  initState() {
+    super.initState();
+    _updateLocation();
+  }
+
+  Future<void> _updateLocation() async {
+    _position = Provider.of<LocationProvider>(context).getLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
+    _updateLocation();
+
     var imgFile = File(widget.imagePath);
     return Scaffold(
       appBar: AppBar(
@@ -45,20 +57,36 @@ class _DisplayPicturePageState extends State<DisplayPicturePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 70)
+            const SizedBox(height: 70),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        elevation: 8,
-        onPressed: () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pushNamed(context, '/photo-rating');
+      floatingActionButton: FutureBuilder(
+        future: _position,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return const Text('Error');
+            } else if (snapshot.hasData) {
+              return FloatingActionButton.extended(
+                elevation: 8,
+                onPressed: () {
+                  debugPrint(snapshot.data.toString());
+                  LocationAlert(context, snapshot.data.toString());
+                },
+                icon: const Icon(Icons.send),
+                label: const Text('Send',
+                    style: TextStyle(fontSize: 20)),
+              );
+            } else {
+              return const Text('Empty data');
+            }
+          } else {
+            return Text('State: ${snapshot.connectionState}');
+          }
         },
-        icon: const Icon(Icons.send),
-        label: const Text('Send',
-            style: TextStyle(fontSize: 20)),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

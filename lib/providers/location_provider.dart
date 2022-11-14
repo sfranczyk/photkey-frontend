@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationProvider extends ChangeNotifier {
-  late Position location;
 
-  Future<Position> updateLocation() async {
+  Future<Position> getLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
 
