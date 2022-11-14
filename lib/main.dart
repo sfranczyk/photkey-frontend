@@ -54,7 +54,7 @@ Future<void> main() async {
       title: title,
       theme: themeData,
       routes: routes,
-      initialRoute: '/take-picture',
+      initialRoute: '/',
     ),
   ));
 }
